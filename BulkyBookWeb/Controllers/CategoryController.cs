@@ -1,5 +1,4 @@
-﻿using BulkyBookWeb.Data;
-using BulkyBookWeb.Models;
+﻿using BulkyBookWeb.Models;
 using BulkyBookWeb.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +12,9 @@ namespace BulkyBookWeb.Controllers
         {
             this.category = category;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            IEnumerable<Category> objCategoryList = category.GetALL();
+            IEnumerable<Category> objCategoryList = await category.GetALL();
 
             return View(objCategoryList);
         }
@@ -29,11 +28,11 @@ namespace BulkyBookWeb.Controllers
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category obj)
+        public async Task<IActionResult> Create(Category obj)
         {
             if (ModelState.IsValid)
             {
-                category.AddCategory(obj);
+                await category.AddCategory(obj);
                 TempData["success"] = "Category Created Successfully";
                 
                 return RedirectToAction("Index");
@@ -43,13 +42,13 @@ namespace BulkyBookWeb.Controllers
         }
 
 		// Get
-		public IActionResult Edit(int? id)
+		public async Task<IActionResult> Edit(int? id)
 		{   
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var categoryFromDb = category.FindCategoryById((int)id);
+            var categoryFromDb = await category.FindCategoryById((int)id);
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -75,13 +74,13 @@ namespace BulkyBookWeb.Controllers
 		}
 
         // Get
-        public IActionResult Delete(int? id)
+        public async  Task<IActionResult> Delete(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var categoryFromDb = category.FindCategoryById((int)id);
+            var categoryFromDb = await category.FindCategoryById((int)id);
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -93,14 +92,14 @@ namespace BulkyBookWeb.Controllers
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePost(int? id)
+        public async Task<IActionResult> DeletePost(int? id)
         {
-            var obj = category.FindCategoryById((int)id);
+            var obj = await category.FindCategoryById((int)id);
             if (obj == null)
             {
                 return NotFound();
             }
-            category.RemoveCategory(obj);
+            await category.RemoveCategory(obj);
 			TempData["success"] = "Category Deleted Successfully";
 			
             return RedirectToAction("Index");

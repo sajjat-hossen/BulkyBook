@@ -4,10 +4,10 @@ namespace BulkyBookWeb.Repository.Interfaces
 {
     public interface ICategory<T> where T : class
     {
-        IEnumerable<T> GetALL();
-        void AddCategory(T entity);
-        T FindCategoryById(int id);
-        void UpdateCategory(T entity);
-        void RemoveCategory(T entity);
+        Task<IEnumerable<T>> GetALL();
+        Task AddCategory(T entity);
+        Task<T> FindCategoryById(int id);
+        Task UpdateCategory(T entity);
+        Task RemoveCategory(T entity);
     }
 }

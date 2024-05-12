@@ -18,29 +18,29 @@ namespace BulkyBookWeb.Repository.Services
         }
         #region AddCategory
 
-        public void AddCategory(T category)
+        public async Task AddCategory(T category)
         {
-            dbSet.Add(category);
-            db.SaveChanges();
+            await dbSet.AddAsync(category);
+            await db.SaveChangesAsync();
         }
 
         #endregion
 
         #region RemoveCategory
 
-        public void RemoveCategory(T category)
+        public async Task RemoveCategory(T category)
         {
             dbSet.Remove(category);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         #endregion
 
         #region FindCategoryById
 
-        public T FindCategoryById(int id)
+        public async Task<T> FindCategoryById(int id)
         {
-            var category = dbSet.Find(id);
+            var category = await dbSet.FindAsync(id);
             return category;
         }
 
@@ -48,9 +48,9 @@ namespace BulkyBookWeb.Repository.Services
 
         #region GetAll
 
-        public IEnumerable<T> GetALL()
+        public async Task<IEnumerable<T>> GetALL()
         {
-            IEnumerable<T> objCategoryList = dbSet.ToList();
+            IEnumerable<T> objCategoryList = await dbSet.ToListAsync();
             return objCategoryList;
         }
 
@@ -58,10 +58,10 @@ namespace BulkyBookWeb.Repository.Services
 
         #region UpdateCategory
 
-        public void UpdateCategory(T category)
+        public async Task UpdateCategory(T category)
         {
             dbSet.Update(category);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         #endregion
