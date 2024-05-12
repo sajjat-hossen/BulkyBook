@@ -1,6 +1,8 @@
 ﻿using BulkyBookWeb.Data;
 using BulkyBookWeb.Models;
 using BulkyBookWeb.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace BulkyBookWeb.Repository.Services
 {
@@ -41,5 +43,6 @@ namespace BulkyBookWeb.Repository.Services
             db.Categories.Update(category);
             db.SaveChanges();
         }
+
     }
 }
