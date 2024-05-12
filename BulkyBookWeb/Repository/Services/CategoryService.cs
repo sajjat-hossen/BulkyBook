@@ -66,6 +66,11 @@ namespace BulkyBookWeb.Repository.Services
             await db.SaveChangesAsync();
         }
 
+        Task<IEnumerable<Category>> ICategory.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
     }
