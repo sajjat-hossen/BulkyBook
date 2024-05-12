@@ -7,9 +7,9 @@ namespace BulkyBookWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategory category;
+        private readonly ICategory<Category> category;
 
-        public CategoryController(ICategory category)
+        public CategoryController(ICategory<Category> category)
         {
             this.category = category;
         }

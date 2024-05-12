@@ -6,41 +6,43 @@ using System.Threading.Tasks;
 
 namespace BulkyBookWeb.Repository.Services
 {
-    public class CategoryService : ICategory
+    public class CategoryService<T> : ICategory<T> where T : class
     {
         private readonly ApplicationDbContext db;
+        DbSet<T> dbSet;
 
         public CategoryService(ApplicationDbContext db)
         {
             this.db = db;
+            dbSet = db.Set<T>();
         }
-        public void AddCategory(Category category)
+        public void AddCategory(T category)
         {
-            db.Categories.Add(category);
+            dbSet.Add(category);
             db.SaveChanges();
         }
 
-        public void RemoveCategory(Category category)
+        public void RemoveCategory(T category)
         {
-            db.Categories.Remove(category);
+            dbSet.Remove(category);
             db.SaveChanges();
         }
 
-        public Category FindCategoryById(int id)
+        public T FindCategoryById(int id)
         {
-            var category = db.Categories.Find(id);
+            var category = dbSet.Find(id);
             return category;
         }
 
-        public IEnumerable<Category> GetALL()
+        public IEnumerable<T> GetALL()
         {
-            IEnumerable<Category> objCategoryList = db.Categories.ToList();
+            IEnumerable<T> objCategoryList = dbSet.ToList();
             return objCategoryList;
         }
 
-        public void UpdateCategory(Category category)
+        public void UpdateCategory(T category)
         {
-            db.Categories.Update(category);
+            dbSet.Update(category);
             db.SaveChanges();
         }
 
