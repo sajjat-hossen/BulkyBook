@@ -16,11 +16,17 @@ namespace BulkyBookWeb.Repository.Services
             this.db = db;
             dbSet = db.Set<T>();
         }
+        #region AddCategory
+
         public void AddCategory(T category)
         {
             dbSet.Add(category);
             db.SaveChanges();
         }
+
+        #endregion
+
+        #region RemoveCategory
 
         public void RemoveCategory(T category)
         {
@@ -28,11 +34,19 @@ namespace BulkyBookWeb.Repository.Services
             db.SaveChanges();
         }
 
+        #endregion
+
+        #region FindCategoryById
+
         public T FindCategoryById(int id)
         {
             var category = dbSet.Find(id);
             return category;
         }
+
+        #endregion
+
+        #region GetAll
 
         public IEnumerable<T> GetALL()
         {
@@ -40,11 +54,17 @@ namespace BulkyBookWeb.Repository.Services
             return objCategoryList;
         }
 
+        #endregion
+
+        #region UpdateCategory
+
         public void UpdateCategory(T category)
         {
             dbSet.Update(category);
             db.SaveChanges();
         }
+
+        #endregion
 
     }
 }

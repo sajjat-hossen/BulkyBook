@@ -16,8 +16,10 @@ namespace BulkyBookWeb.Controllers
         public IActionResult Index()
         {
             IEnumerable<Category> objCategoryList = category.GetALL();
+
             return View(objCategoryList);
         }
+
         // Get
         public IActionResult Create()
         {
@@ -33,8 +35,10 @@ namespace BulkyBookWeb.Controllers
             {
                 category.AddCategory(obj);
                 TempData["success"] = "Category Created Successfully";
+                
                 return RedirectToAction("Index");
             }
+            
             return View(obj);
         }
 
@@ -50,7 +54,8 @@ namespace BulkyBookWeb.Controllers
             {
                 return NotFound();
             }
-			return View(categoryFromDb);
+			
+            return View(categoryFromDb);
 		}
 
 		// POST
@@ -62,9 +67,11 @@ namespace BulkyBookWeb.Controllers
 			{
 				category.UpdateCategory(obj);
 				TempData["success"] = "Category Edited Successfully";
-				return RedirectToAction("Index");
+				
+                return RedirectToAction("Index");
 			}
-			return View(obj);
+			
+            return View(obj);
 		}
 
         // Get
@@ -79,6 +86,7 @@ namespace BulkyBookWeb.Controllers
             {
                 return NotFound();
             }
+            
             return View(categoryFromDb);
         }
 
@@ -94,7 +102,8 @@ namespace BulkyBookWeb.Controllers
             }
             category.RemoveCategory(obj);
 			TempData["success"] = "Category Deleted Successfully";
-			return RedirectToAction("Index");
+			
+            return RedirectToAction("Index");
         }
     }
 }
